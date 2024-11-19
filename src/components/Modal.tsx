@@ -3,7 +3,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import ErrorMessageField from "./ErroreMessageField";
 import { Dispatch, SetStateAction } from "react";
 import React from "react";
-import { Status } from "../models/Status";
 import { Product } from "../models/Product";
 
 type FormValues = {
@@ -13,7 +12,7 @@ type FormValues = {
     size: string;
 }
 
-function Modal( {modalToggle, errorsModal, onSubmit, closeModal, isSubmitSuccessful, defaultValues}: { modalToggle: boolean, errorsModal: string, onSubmit: SubmitHandler<Partial<FormValues>>, closeModal: Dispatch<SetStateAction<boolean>>, isSubmitSuccessful: Status, defaultValues: Partial<Product> } ) {
+function Modal( {modalToggle, closeModal, onSubmit, defaultValues, errorsModal }: { modalToggle: boolean, closeModal: Dispatch<SetStateAction<boolean>>, onSubmit: SubmitHandler<Partial<FormValues>>, defaultValues: Partial<Product>, errorsModal: string  } ) {
     const newProductInitialState = {
         name: '',
         cod: '',
@@ -31,22 +30,17 @@ function Modal( {modalToggle, errorsModal, onSubmit, closeModal, isSubmitSuccess
         }
     }, [defaultValues]);
 
-    React.useEffect(() => {
-        if (isSubmitSuccessful === Status.fulfilled) {
-          reset(newProductInitialState);
-        }
-    }, [isSubmitSuccessful, reset]);
-
     return (
         <>
         <div 
-        className={ `modal ${ modalToggle ? '' : 'fade' }` } 
-        style={ { display: modalToggle ? 'block' : 'none'} }>   
+            className={ `modal ${ modalToggle ? '' : 'fade' }` } 
+            style={ { display: modalToggle ? 'block' : 'none'} }>   
         <div className="modal-dialog">
             <form onSubmit={ handleSubmit(onSubmit) }>
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h1 className="modal-title fs-5">Aggiungi prodotto</h1>
+                        <h1 className="modal-title fs-5">
+                            { defaultValues.id ? 'Modifica' : 'Aggiungi' } prodotto</h1>
                         <button type="button" className="btn-close" onClick={ () => closeModal(false) }></button>
                     </div>
                     <div className="modal-body">
@@ -94,6 +88,10 @@ function Modal( {modalToggle, errorsModal, onSubmit, closeModal, isSubmitSuccess
                                 {
                                     ...register('price', {
                                         required: 'Il campo price è obbligatorio',
+                                        min: {
+                                            value: 1,
+                                            message: 'Il prezzo deve essere maggiore di 0'
+                                        },
                                     })
                                 } 
                             />

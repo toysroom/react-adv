@@ -1,11 +1,12 @@
 {
   "products": [
     {
-      "name": "aaaa",
-      "cod": "aaa",
-      "price": 0,
-      "size": "aaa",
-      "id": 2
+      "name": "aaaaaa",
+      "cod": "vcvzxcv",
+      "price": "333",
+      "size": "gdfgdfg",
+      "id": 3,
+      "destroy": "idle"
     }
   ]
 }
