@@ -1,0 +1,18 @@
+CREARE PROGETTO CON VITE:
+    - npm create vite@latest (react variante typescript)
+
+INSTALLARE LE DIPENDENZE:
+    - routing: npm i react-router-dom 
+    - form: npm i react-hook-form
+    - stato: npm i react-redux @reduxjs/toolkit
+    - multilingua: npm i react-i18next i18next
+    - grafica: npm i bootstrap
+    - http: npm i axios
+    - backend fake: json-server
+
+CREARE BACKEND:
+    - creare file server/db.json
+    - creare script nel package.json "server": "json-server --watch server/db.json"
+
+FRONTEND:
+    
